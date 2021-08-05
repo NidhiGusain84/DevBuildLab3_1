@@ -10,8 +10,8 @@ namespace Lab3_1
             {
                 Console.WriteLine();
                 Console.Write("\nWould you like to know about another student? (enter \"yes\" or \"no\": ");
-                string response = Console.ReadLine();
-                response = response.ToLower();
+                string response = Console.ReadLine().ToLower();
+                
 
                 if (response == "yes" || response == "y")
                 {
@@ -35,32 +35,33 @@ namespace Lab3_1
             string[] previousTitle = {"Post Closing Auditor", "Document Specialist", "Team Leader", "Trainer", "Quailty Control Auditor" };
 
             string choice;
+            int studentNo;
+            string strNo;
 
             Console.WriteLine("Welcome to our Dev.Build class.");
             do
             {
                 Console.Write("\nWhich student would you like to learn more about? (enter a number 1-5): ");
 
-                int studentNo = int.Parse(Console.ReadLine());
+                 strNo = Console.ReadLine();
+                int.TryParse(strNo, out studentNo);
 
-
-                while (studentNo > 5)
+                while (studentNo <= 0 || studentNo > studentNames.Length)
                 {
                     Console.Write("\nThat student does not exist. Please try again. (enter a number 1-5): ");
-                    studentNo = int.Parse(Console.ReadLine());
+                     strNo = Console.ReadLine();
+                     int.TryParse(strNo, out studentNo);
                 }
 
-
-
                 Console.Write($"\nStudent {studentNo} is {studentNames[studentNo - 1]}. What would you like to know about {studentNames[studentNo - 1]}? (enter \"favorite food\" or \"Previous title\")");
-                choice = Console.ReadLine();
-                choice = choice.ToLower();
+                choice = Console.ReadLine().ToLower();
+               
 
                 while (choice != "favorite food" && choice != "previous title")
                 {
-                    Console.Write("\nThat data does not exist. Please try again. (enter \"favorite food\" or \"previous title\"");
-                    choice = Console.ReadLine();
-                    choice = choice.ToLower();
+                    Console.Write("\nThat data does not exist. Please try again. (enter \"favorite food\" or \"previous title\")");
+                    choice = Console.ReadLine().ToLower();
+                   
                 }
 
                 if (choice == "favorite food")
@@ -71,15 +72,10 @@ namespace Lab3_1
                 {
                     Console.WriteLine($"\n{studentNames[studentNo - 1]}'s previous title is {previousTitle[studentNo - 1]}.");
                 }
-            } while (KeepGoing() == true);
+            } while (KeepGoing());
 
             Console.WriteLine("\n Thanks!");
-
-                
-            
-
-
-
+                           
         }
     }
 }
